@@ -14,6 +14,6 @@ deploy:
   provider: lambda
   function_name: lambda-test
   region: us-east-1
-  role: arn:aws:iam::0123456789012:role/lambda_basic_execution
+  role: arn:aws:iam::980858071036:role/service-role/tank-levels
   runtime: python3.6
   handler_name: extractor/extractor.extract
