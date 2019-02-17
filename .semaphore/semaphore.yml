@@ -21,6 +21,7 @@ blocks:
       - name: Test
         commands:
           - ./setup.py test
+          - codecov
 
       - name: Lint
         commands:
