@@ -1,0 +1,27 @@
+version: v1.0
+name: Build
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+  - name: "Unit tests"
+    task:
+      secrets:
+        - name: codecov
+
+      prologue:
+        commands:
+          - checkout
+          - virtualenv -p python3.7 build
+          - workon build
+
+      jobs:
+      - name: Test
+        commands:
+          - ./setup.py test
+
+      - name: Lint
+        commands:
+          - echo "lint"
