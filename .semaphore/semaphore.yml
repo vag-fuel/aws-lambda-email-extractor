@@ -15,7 +15,7 @@ blocks:
         commands:
           - checkout
           - virtualenv -p python3.7 build
-          - workon build
+          - pwd
 
       jobs:
       - name: Test
