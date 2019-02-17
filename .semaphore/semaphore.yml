@@ -16,6 +16,7 @@ blocks:
           - checkout
           - virtualenv -p python3.7 build
           - source build/bin/activate
+          - pip install -e '.[test]'
 
       jobs:
       - name: Test

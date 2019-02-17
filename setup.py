@@ -1,5 +1,11 @@
 #!/usr/bin/env python
+import sys
 from setuptools import setup, find_packages
+from typing import List
+
+
+def pytest_runner() -> List[str]:
+    return ['pytest-runner'] if {'pytest', 'test', 'ptr'}.intersection(sys.argv) else []
 
 
 test_requires = [
@@ -17,7 +23,7 @@ setup(
     url='https://github.com/vag-fuel/aws-lambda-email-extractor',
     packages=find_packages(),
     install_requires=[],
-    setup_requires=['pytest-runner'],
+    setup_requires=[] + pytest_runner(),
     tests_require=test_requires,
     extras_require={
         'test': test_requires,
