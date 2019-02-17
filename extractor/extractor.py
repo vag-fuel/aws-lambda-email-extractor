@@ -1,2 +1,2 @@
 def extract(event, context):
-    pass
+    print('Hello world!')

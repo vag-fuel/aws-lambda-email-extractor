@@ -7,3 +7,13 @@ script:
   - python setup.py test
 after_success:
   - codecov
+deploy:
+  on:
+    # TODO: shair: switch back to master
+    branch: continuous-integration-and-deployment
+  provider: lambda
+  function_name: lambda-test
+  region: us-east-1
+  role: arn:aws:iam::0123456789012:role/lambda_basic_execution
+  runtime: python3.6
+  handler_name: extractor/extractor.extract
