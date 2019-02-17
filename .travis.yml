@@ -16,4 +16,5 @@ deploy:
   region: us-east-1
   role: arn:aws:iam::980858071036:role/service-role/tank-levels
   runtime: python3.6
-  handler_name: extractor/extractor.extract
+  module_name: extractor/extractor
+  handler_name: extract
