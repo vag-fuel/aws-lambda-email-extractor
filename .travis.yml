@@ -18,3 +18,4 @@ deploy:
   runtime: python3.6
   module_name: extractor/extractor
   handler_name: extract
+  description: "#{context.env['TRAVIS_COMMIT']}: #{context.env['TRAVIS_COMMIT_MESSAGE']}"
