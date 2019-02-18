@@ -7,8 +7,9 @@ matrix:
       dist: xenial
       sudo: true
 env:
-  - SH=bash
-  - PYTHONPATH=.lib/
+  global:
+    - SH=bash
+    - PYTHONPATH=.lib/
 install:
   - pip install -t .lib/ -r requirements/test.txt
 script:
