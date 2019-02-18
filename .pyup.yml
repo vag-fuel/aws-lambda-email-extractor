@@ -1,0 +1,6 @@
+update: insecure
+schedule: every week
+requirements:
+  - requirements/test.txt:
+      update: all
+  - requirements/dev.txt:
