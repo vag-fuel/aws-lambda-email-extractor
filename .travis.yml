@@ -10,6 +10,7 @@ env:
   global:
     - SH=bash
     - PYTHONPATH=.lib/
+    - 'PATH=$PATH:$(pwd).lib/bin'
 install:
   - pip install -t .lib/ -r requirements/test.txt
 script:
