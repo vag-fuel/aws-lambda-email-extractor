@@ -2,21 +2,18 @@ language: python
 python:
   - '3.6'
 install:
-  - pip install -e '.[test]'
+  - pip install -r requirements/test.txt
 script:
-  - python setup.py test
+  - pytest --cov=extractor
+  - flake8
+  - pylint **/*.py
 after_success:
   - codecov
 deploy:
-  on:
-    # TODO: shair: switch back to master
-    branch: continuous-integration-and-deployment
   provider: lambda
-  function_name: lambda-test
+  function_name: tank-level-extractor
   region: us-east-1
   role: arn:aws:iam::980858071036:role/service-role/tank-levels
   runtime: python3.6
   module_name: extractor/extractor
   handler_name: extract
-#  description: "#{context.env['TRAVIS_COMMIT']}: #{context.env['TRAVIS_COMMIT_MESSAGE']}"
-  description: "Deploy build #{context.env['TRAVIS_BUILD_NUMBER']} to AWS Lambda via Travis CI"
