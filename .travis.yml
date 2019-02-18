@@ -14,6 +14,8 @@ script:
   - pylint **/*.py
 after_success:
   - codecov
+before_deploy:
+  - pip install -t lib/ -r requirements/base.txt
 deploy:
   provider: lambda
   function_name: tank-level-extractor
@@ -22,3 +24,5 @@ deploy:
   runtime: python3.7
   module_name: extractor/extractor
   handler_name: extract
+  environment_variables:
+    - PYTHONPATH=lib/
