@@ -25,7 +25,7 @@ class EmailAttachment:
         body = self._attachment.get_payload()
         if self._attachment.get('Content-Transfer-Encoding') == 'base64':
             body = b64decode(body)
-        if self.content_type == 'text/plain' and type(body) is bytes:
+        if self.content_type == 'text/plain' and isinstance(body, bytes):
             body = body.decode()
         return body
 
