@@ -48,13 +48,6 @@ To: recipient@example.com
 Content-Type: multipart/alternative; boundary="00000000000097792a05822e7122"
 
 --00000000000097792a05822e7122
-Content-Type: text/plain; charset="UTF-8"
-
-This is an example email
-*This is an example email*
-This is an example email
-
---00000000000097792a05822e7122
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 

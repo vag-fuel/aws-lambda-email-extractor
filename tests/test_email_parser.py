@@ -12,6 +12,12 @@ def base_email() -> bytes:
 
 
 @fixture
+def html_email() -> bytes:
+    with open(pathlib.Path(__file__).parent / 'fixtures' / 'html email.eml', 'r+b') as f:
+        return f.read()
+
+
+@fixture
 def two_recipient_email() -> bytes:
     with open(pathlib.Path(__file__).parent / 'fixtures' / 'email with two recipients.eml', 'r+b') as f:
         return f.read()
@@ -30,6 +36,12 @@ def test_that_email_message_can_read_an_email_without_attachments(base_email: by
     assert message.to_addr == ('recipient@example.com',)
     assert message.subject == 'Example Email'
     assert message.body == 'This is an example email\n*This is an example email*\nThis is an example email\n'
+
+
+def test_that_html_emails_are_converted_to_plain_text(html_email: bytes):
+    message = ParsedEmail.from_bytes(html_email)
+
+    assert message.body == 'This is an example email\n\n **This is an example email**\n\nThis is an example email'
 
 
 def test_to_addr_contains_all_email_recipients(two_recipient_email: bytes):

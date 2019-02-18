@@ -4,6 +4,8 @@ import re
 from base64 import b64decode
 from typing import Tuple, Generator, Union
 
+from html2text import html2text
+
 
 LOGGER = logging.getLogger()
 LOGGER.setLevel(logging.INFO)
@@ -53,9 +55,15 @@ class ParsedEmail:
         self._message = message
 
     @property
-    def body(self) -> str:
-        # what if there is no plain text body? Consider using https://github.com/Alir3z4/html2text
-        return self._message.get_body('plain').get_payload().replace('\r\n', '\n')
+    def body(self) -> Union[str, None]:
+        body = None
+        body_part = self._message.get_body(('plain', 'related', 'html'))
+        if body_part:
+            if body_part.get_content_type() == 'text/html':
+                body = html2text(body_part.get_payload()).strip()
+            else:
+                body = body_part.get_payload().replace('\r', '')
+        return body
 
     @property
     def from_addr(self) -> str:
