@@ -4,7 +4,7 @@ python:
 install:
   - pip install -r requirements/test.txt
 script:
-  - pytest --cov=extractor
+  - pytest --cov-report=xml --cov=extractor
   - flake8
   - pylint **/*.py
 after_success:

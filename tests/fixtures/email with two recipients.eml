@@ -1,0 +1,60 @@
+Return-Path: <sender@example.com>
+Received: from mail-it1-f176.google.com (mail-it1-f176.google.com [209.85.166.176])
+ by inbound-smtp.us-east-1.amazonaws.com with SMTP id r53t1en9jdq4v2eivdgvbmhbgdh3feh0p2lji1o1
+ for recipient@example.com;
+ Mon, 18 Feb 2019 20:35:20 +0000 (UTC)
+X-SES-Spam-Verdict: PASS
+X-SES-Virus-Verdict: PASS
+Received-SPF: pass (spfCheck: domain of _spf.google.com designates 209.85.166.176 as permitted sender) client-ip=209.85.166.176; envelope-from=sender@example.com; helo=mail-it1-f176.google.com;
+Authentication-Results: amazonses.com;
+ spf=pass (spfCheck: domain of _spf.google.com designates 209.85.166.176 as permitted sender) client-ip=209.85.166.176; envelope-from=sender@example.com; helo=mail-it1-f176.google.com;
+ dkim=pass header.i=@gmail.com;
+ dmarc=pass header.from=gmail.com;
+X-SES-RECEIPT: AEFBQUFBQUFBQUFGNXZDZ0lSN0plcnZJb1pZUGR3Tk9WTVNVMGhXYWZ2WnE5WTluWnE5bUlZS0dPbHRPY0JQYnJ2TURHa0ZiZnpyODZ5VndKUmFvUWJ1Q3dIUFkwcnBFMmVab3FHTGdqVldRMHZYTENQTVJYeDNsc2I4cVZoTHJMaktCbTFnNkxJQXFMWDdQTjdCQ1RMM1BndU9NMFMrN3oxYXo2QmdXS0J0RnFFeWpOWW1mMXVCUXF2dEZZUTVkUjBOZ3lJMlJidHlZc0VTUHRBVlZaemZHTitkSld6NHZoMTJpcWZUNk4zTnNreDN1RW5KMUtrbjQ1U3hJdmpSUkhqVHNiRW9LMHVDT1MrdnVTU0QzK2wzQ1BrRTRmV2dEVjZqL2sydWtRRjI4R3BWSmx1ZDI5a3c9PQ==
+X-SES-DKIM-SIGNATURE: a=rsa-sha256; q=dns/txt; b=IYUIefJI6eiJwpA84UJAy1mua5qhJJFLvG758HkLgNXSzJrG44SfOhi5GQZrfXJD5nkN3wO+B5llKtKrWDEfiLcwvfCokVhbC2jiRqbJEczIsYZoN6CTJNTWr/7HZsQQvh4WtEVUWDhMBUYH0HBzj5ysyETb8LTV56guodyHnkQ=; c=relaxed/simple; s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug; d=amazonses.com; t=1550522120; v=1; bh=JRQU80YY4ybsqMTOy7yUplLtXKes4jOQEqkjs6bwggk=; h=From:To:Cc:Bcc:Subject:Date:Message-ID:MIME-Version:Content-Type:X-SES-RECEIPT;
+Received: by mail-it1-f176.google.com with SMTP id m137so1083502ita.0
+        for <recipient@example.com>; Mon, 18 Feb 2019 12:35:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=JRQU80YY4ybsqMTOy7yUplLtXKes4jOQEqkjs6bwggk=;
+        b=E+atjOVv2iG7aqu1V/xAFf6zxVfwcY0AGttD0FgOPkCvmmZPEL1eSHZVJ4KauPGStw
+         FvsDy6Iphm27oD5C7uozY681LpFbeQqoG647R8rTuJcbEps3dvp5qcJ2gReoPwKzdteC
+         N2VewjnnemW79zlIk37kGNucy4CLba9VVv/0UPZ+0l9Q1mPug2nMLDJMvhTvDvXtPTfS
+         e2EhYCjSpr0Tq6VBvEcbbLkpsaTiytKifooiqVgj6zhsjfu65MExeoHE94mQrRS+yIHB
+         g2e4MAaWaGxxVj6RLIhMSIBg0WVh07qWwkzNdGGctvBEUNjP7Q1m5nJ3tFXzDvaW2jYU
+         gnGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=JRQU80YY4ybsqMTOy7yUplLtXKes4jOQEqkjs6bwggk=;
+        b=lY6eIMsK3OdaDZfuWZEpZff87p5Wol6uZJ0S1hZWmUST/KMkyo7XDsGH/1YaqIYVXv
+         RMi1Go+cijbJjtRi6Bq5sptNfsu9XdLp2BMxXXCA/MLM60PxRckiosvDvdCQTqozWHGK
+         MTBs23QerEgk4nRKTqpX7ZFQGer7pWFJy397Js6Lwlkb8yrb62rJB3jRE5fE8qdmcdDq
+         4yBMDRETyun6RQC1RqUuaCH/ZKGrBwZZdV117eVMJAZiHNdY1W9d6ZHeosDi/9DhkSSz
+         qkDdbhO0WksXR0jjjb/3LRyXnXtBERiEC/ljKpbENmmdJxIUeTysbHcce2bDvUVNXYMM
+         NQ5A==
+X-Gm-Message-State: AHQUAuZnkOV12VQXSS8hh3ia+LI4RMugRRL6BUbXBupTpL70Bwu3wG0P
+	rREATGGdqvgWxtl6jWDIAvpSg1ZiY+PDpKU+hr188g==
+X-Google-Smtp-Source: AHgI3IaHHwysCwvnGqEWrqGZxBGG2CQZfV2RizPWxe0SRhY1z7oAxFEYDjSH8cwKlUBHooqcYXMUcEwPps8PQF3Tfx0=
+X-Received: by 2002:a5d:8701:: with SMTP id u1mr15886595iom.69.1550522119214;
+ Mon, 18 Feb 2019 12:35:19 -0800 (PST)
+MIME-Version: 1.0
+From: The Sender <sender@example.com>
+Date: Mon, 18 Feb 2019 15:35:07 -0500
+Message-ID: <CAPHbH+NjUjFjfbg4CFG1Ckmvtbd2D3wce6H1wmpmYn1JrOPr=Q@mail.gmail.com>
+Subject: Email with two recipients
+To: The Recipient <recipient@example.com>, foo@example.com
+Content-Type: multipart/alternative; boundary="00000000000021db94058231106e"
+
+--00000000000021db94058231106e
+Content-Type: text/plain; charset="UTF-8"
+
+This is an email with two recipients
+
+--00000000000021db94058231106e
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr"><div class="gmail_default" style="font-family:arial,helvetica,sans-serif">This is an email with two recipients<br></div></div>
+
+--00000000000021db94058231106e--
