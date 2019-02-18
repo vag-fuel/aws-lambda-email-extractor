@@ -106,6 +106,3 @@ venv.bak/
 # editors
 .sw[a-z]
 .idea/
-
-# external dependencies
-/lib

@@ -15,7 +15,7 @@ script:
 after_success:
   - codecov
 before_deploy:
-  - pip install -t .lib/ -r requirements/base.txt
+  - pip install -t lib/ -r requirements/base.txt
 deploy:
   provider: lambda
   function_name: tank-level-extractor
@@ -25,4 +25,4 @@ deploy:
   module_name: extractor/extractor
   handler_name: extract
   environment_variables:
-    - PYTHONPATH=.lib/
+    - PYTHONPATH=lib/
