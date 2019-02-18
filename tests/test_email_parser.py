@@ -42,6 +42,7 @@ def test_that_attachments_are_extracted(email_with_attachments: bytes):
     message = ParsedEmail.from_bytes(email_with_attachments)
     attachments = list(message.get_attachments())
 
+    assert message.has_attachments
     assert len(attachments) == 3
     assert attachments[0].filename == 'a-text-file.txt'
     assert attachments[1].filename == 'a-pdf-file.pdf'

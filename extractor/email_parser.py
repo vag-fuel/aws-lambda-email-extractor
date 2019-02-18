@@ -1,7 +1,12 @@
 import email
+import logging
 import re
 from base64 import b64decode
 from typing import Tuple, Generator, Union
+
+
+LOGGER = logging.getLogger()
+LOGGER.setLevel(logging.INFO)
 
 
 def clean_email_address(address: str) -> str:
@@ -11,6 +16,8 @@ def clean_email_address(address: str) -> str:
         match = re.search(r'<(.*?)>', address)
         if match:
             return match.group(1).strip()
+        else:
+            LOGGER.warning('Unable to clean email address "%s" even though it contains "<"', address)
     return address.strip()
 
 
@@ -53,6 +60,12 @@ class ParsedEmail:
     @property
     def from_addr(self) -> str:
         return clean_email_address(self._message['from'])
+
+    @property
+    def has_attachments(self) -> bool:
+        for _ in self.get_attachments():
+            return True
+        return False
 
     @property
     def subject(self) -> str:

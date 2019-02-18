@@ -1,8 +1,9 @@
-import email
 import json
 import logging
 
 import boto3
+
+from extractor.email_parser import ParsedEmail
 
 
 # noinspection PyUnusedLocal
@@ -24,9 +25,7 @@ def lambda_handler(event, context):
     logger.info('Fetching %s from %s to %s', object_key, bucket_name, download_path)
     s3_client.download_file(bucket_name, object_key, download_path)
 
-    with open(download_path) as f:
-        message = email.message_from_file(f)
+    with open(download_path, 'r+b') as f:
+        message = ParsedEmail.from_bytes(f.read())
 
-    for part in message.walk():
-        if part.get_content_disposition() == 'attachment':
-            logger.info('Content Type: %s', part.get_content_type())
+    logger.info('%s %s %s', message.from_addr, ', '.join(message.to_addr), message.body)
