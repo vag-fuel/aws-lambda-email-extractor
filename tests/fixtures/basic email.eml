@@ -1,0 +1,68 @@
+Return-Path: <sender@example.com>
+Received: from mail-it1-f181.google.com (mail-it1-f181.google.com [209.85.166.181])
+ by inbound-smtp.us-east-1.amazonaws.com with SMTP id 5l0utiplcrbtqnbsrnjsftshg9hjde6lh9uetk01
+ for recipient@example.com;
+ Mon, 18 Feb 2019 17:27:50 +0000 (UTC)
+X-SES-Spam-Verdict: PASS
+X-SES-Virus-Verdict: PASS
+Received-SPF: pass (spfCheck: domain of _spf.google.com designates 209.85.166.181 as permitted sender) client-ip=209.85.166.181; envelope-from=sender@example.com; helo=mail-it1-f181.google.com;
+Authentication-Results: amazonses.com;
+ spf=pass (spfCheck: domain of _spf.google.com designates 209.85.166.181 as permitted sender) client-ip=209.85.166.181; envelope-from=sender@example.com; helo=mail-it1-f181.google.com;
+ dkim=pass header.i=@gmail.com;
+ dmarc=pass header.from=gmail.com;
+X-SES-RECEIPT: AEFBQUFBQUFBQUFGcjYyRUJGY2lCUHJlbkpSTmRpRzFsNktzbS8yQ3E5UmZOZzNtWG5iUUhodEQvaGJMNVd3dXVTT1hGZnlCTndxTzNFWDMrS0d5Wit5ZklKbFRCRFR5OEcvbExhZnpVZURhTUtzZGdQSWd1QlhrTG1tL284Q0lxWTVxaHhNTko1akpzTE8ya2hjb2lDL1NmWUEwNkpYcXRSd2tqdU15QWhLbERNZ3h0YmFYTDdrWVpnQW5kQmNUVWNUL044UzFWaXkvNXM5MW1LOHlXcm1Qc1ZYdExCUWxOTll1L21uZE5TM3B0S3ZnV1labW5VTUVYMHVMUlRsSFdjN1dnNHk4ZjR2STYwSFFrdlR5SFBYYW5HKy9iTS9GdmpMRnR1WmVmTnVPUFZNNDd5aGZid0E9PQ==
+X-SES-DKIM-SIGNATURE: a=rsa-sha256; q=dns/txt; b=NPlVdGbpEd3Q/zxPreUGviA8fVXJbi3HaQq1/fLJe63lMPM3DFvppBd5ZGe+QcU9sN9BSprM59pbsJryEU9s0pqx9SyNFow/NaiNnGhIGb0gWdrKmkHvoxyvSeg9yaudpa+CFt1uXu4qtzIZY731NtHbwf6CdB1F+T2yzaa4XbU=; c=relaxed/simple; s=ug7nbtf4gccmlpwj322ax3p6ow6yfsug; d=amazonses.com; t=1550510870; v=1; bh=5NQDDQoui2189kNInVPxI/LeNdjZnB4+dIzCD2mwT7A=; h=From:To:Cc:Bcc:Subject:Date:Message-ID:MIME-Version:Content-Type:X-SES-RECEIPT;
+Received: by mail-it1-f181.google.com with SMTP id r11so42993025itc.2
+        for <recipient@example.com>; Mon, 18 Feb 2019 09:27:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=5NQDDQoui2189kNInVPxI/LeNdjZnB4+dIzCD2mwT7A=;
+        b=U8T5TTxS/D/I4aSnWucs4eCmIfkNqtHHBHj1YWJrQaSeQMq+h1tzTWurUKLZ3ebh5/
+         iQ5nVsfPAx0Id3pO05+E8K6Y2xT5KPIEfNBOmJ46ol3D+g93Prrk1qEmdqEGalh0IJnx
+         w2bX2x6OXCPXRB9kd7uALJnkQcwc4DghZymzP5YXvPky7xB+cYIbyuQp/zHe9ORvaFFE
+         M+k46oYbnDU5JqvJ82+nmd4LxHXL7oHLAUbzTpDxWCsNL08CyM4aUjaOLenGxvGPh7Jp
+         EynjFJjQIzZ5oTblIgokNXHjmZh3OK/QdL2pJ+XQFF9h119xb0KOhcs4fKpgXb9UNPpR
+         WbUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=5NQDDQoui2189kNInVPxI/LeNdjZnB4+dIzCD2mwT7A=;
+        b=XZZd1Q3b9ukEEE+lMWGOdu91f6eDnfUA1LoLgZxkFffpxQv9Zxnb8PQj86d5/Y22Nt
+         vMFqflzA0rENhpZJvs9qUJQR4pAz70ZhYXPQThtgikw/2wxaAFU0iFsCC1m2ztFtJXbd
+         EEUUajEuVWKtUhbU9w+/9aYkT5lg74OfpMLOioiQcYDCdNYXOUrox1cB2w7KZ/63FqQf
+         4LmNqaRU5lKJV2B53g4veGO1QbvqLTG1kRH/9LP2vf5sFj+oDvs5NZkuasyORGjrdqRp
+         Pg978agM4D3p9/Ecyq9KoLKJb9i51S6ALi3c9aSIouRQDCv0yS5URQ0Cvrfet+P7c0dq
+         Ipnw==
+X-Gm-Message-State: AHQUAuYFzPEk9jdR4zJvRCn1zxa+S5UA5IY5mUG90jUwdjLdty9fWwXF
+	RAoHEnjcqYuT2wKgqjvlUHrfZgsAyIFYNi2DJadguw==
+X-Google-Smtp-Source: AHgI3IY/RS7z7BwunvnsUN0E1hhEbYqptmB7ilwMBBx2VCL/dDephaUFSvDISOTt6gfoap56a502CrBD04kGGUyAAz8=
+X-Received: by 2002:a5d:8701:: with SMTP id u1mr15301230iom.69.1550510869410;
+ Mon, 18 Feb 2019 09:27:49 -0800 (PST)
+MIME-Version: 1.0
+From: The Sender <sender@example.com>
+Date: Mon, 18 Feb 2019 12:27:38 -0500
+Message-ID: <CAPHbH+NO6mMCwM1Di4RTonMu6dU3-GrgjGTW5qtOxg1kB8_xNQ@mail.gmail.com>
+Subject: Example Email
+To: recipient@example.com
+Content-Type: multipart/alternative; boundary="00000000000097792a05822e7122"
+
+--00000000000097792a05822e7122
+Content-Type: text/plain; charset="UTF-8"
+
+This is an example email
+*This is an example email*
+This is an example email
+
+--00000000000097792a05822e7122
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr"><div class=3D"gmail_default" style=3D"font-family:arial,he=
+lvetica,sans-serif">This is an example email</div><div class=3D"gmail_defau=
+lt" style=3D"font-family:arial,helvetica,sans-serif"><b>This is an example
+email</b></div><div class=3D"gmail_default" style=3D"font-family:arial,helv=
+etica,sans-serif"><font size=3D"6">This is an example email</font><br></div=
+></div>
+
+--00000000000097792a05822e7122--

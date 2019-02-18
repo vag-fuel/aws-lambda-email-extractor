@@ -1,10 +1,15 @@
 language: python
 python:
-  - '3.6'
+  - '3.7'
+matrix:
+  include:
+    - python: '3.7'
+      dist: xenial
+      sudo: true
 install:
   - pip install -r requirements/test.txt
 script:
-  - pytest --cov=extractor
+  - pytest --cov-report=xml --cov=extractor
   - flake8
   - pylint **/*.py
 after_success:
@@ -14,6 +19,6 @@ deploy:
   function_name: tank-level-extractor
   region: us-east-1
   role: arn:aws:iam::980858071036:role/service-role/tank-levels
-  runtime: python3.6
+  runtime: python3.7
   module_name: extractor/extractor
   handler_name: extract
