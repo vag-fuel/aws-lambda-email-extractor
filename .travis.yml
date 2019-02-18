@@ -6,14 +6,21 @@ matrix:
     - python: '3.7'
       dist: xenial
       sudo: true
+env:
+  - SH=bash
+  - PYTHONPATH=.lib/
 install:
-  - pip install -r requirements/test.txt
+  - pip install -t .lib/ -r requirements/test.txt
 script:
   - pytest --cov-report=xml --cov=extractor
   - flake8
   - pylint **/*.py
 after_success:
   - codecov
+before_deploy:
+  # uninstall all test dependencies
+  - rm -rf .lib
+  - pip install -t .lib/ -r requirements/base.txt
 deploy:
   provider: lambda
   function_name: tank-level-extractor
@@ -22,3 +29,5 @@ deploy:
   runtime: python3.7
   module_name: extractor/extractor
   handler_name: extract
+  environment_variables:
+    - PYTHONPATH=.lib/
