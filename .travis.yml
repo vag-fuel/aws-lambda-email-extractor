@@ -6,13 +6,8 @@ matrix:
     - python: '3.7'
       dist: xenial
       sudo: true
-env:
-  global:
-    - SH=bash
-    - PYTHONPATH=.lib/
-    - 'PATH=$PATH:$(pwd).lib/bin'
 install:
-  - pip install -t .lib/ -r requirements/test.txt
+  - pip install -r requirements/test.txt
 script:
   - pytest --cov-report=xml --cov=extractor
   - flake8
@@ -20,8 +15,6 @@ script:
 after_success:
   - codecov
 before_deploy:
-  # uninstall all test dependencies
-  - rm -rf .lib
   - pip install -t .lib/ -r requirements/base.txt
 deploy:
   provider: lambda
