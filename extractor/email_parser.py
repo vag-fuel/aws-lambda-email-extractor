@@ -1,14 +1,12 @@
 import email
 import logging
 import re
-from base64 import b64decode
 from typing import Tuple, Generator, Union
 
 from html2text import html2text
 
 
 LOGGER = logging.getLogger()
-LOGGER.setLevel(logging.INFO)
 
 
 def clean_email_address(address: str) -> str:
@@ -30,13 +28,8 @@ class EmailAttachment:
         self._attachment = attachment
 
     @property
-    def body(self) -> Union[str, bytes]:
-        body = self._attachment.get_payload()
-        if self._attachment.get('Content-Transfer-Encoding') == 'base64':
-            body = b64decode(body)
-        if self.content_type == 'text/plain' and isinstance(body, bytes):
-            body = body.decode()
-        return body
+    def body(self) -> bytes:
+        return self._attachment.get_payload(decode=True)
 
     @property
     def content_type(self) -> str:

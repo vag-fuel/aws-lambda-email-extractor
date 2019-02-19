@@ -1,9 +1,7 @@
-import json
 import logging
 
-import boto3
-
 from extractor.email_parser import ParsedEmail
+from extractor.email_getter import get_raw_email
 
 
 # noinspection PyUnusedLocal
@@ -12,20 +10,12 @@ def lambda_handler(event, context):
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
 
-    s3_client = boto3.client('s3')
-
-    logger.info(json.dumps(event['Records'][0]['ses']))
-
     message_id = event['Records'][0]['ses']['mail']['messageId']
-    object_key = f'dayton-freight/{message_id}'
     bucket_name = 'tank-levels'
+    # key prefix is the first part of the email address (i.e. 'jdoe' from 'jdoe@example.com')
+    key_prefix = event['Records'][0]['ses']['receipt']['recipients'][0].split('@')[0]
 
-    download_path = f'/tmp/{message_id}'
-
-    logger.info('Fetching %s from %s to %s', object_key, bucket_name, download_path)
-    s3_client.download_file(bucket_name, object_key, download_path)
-
-    with open(download_path, 'r+b') as f:
-        message = ParsedEmail.from_bytes(f.read())
+    raw_email = get_raw_email(message_id, bucket_name, key_prefix)
+    message = ParsedEmail.from_bytes(raw_email)
 
     logger.info('%s %s %s', message.from_addr, ', '.join(message.to_addr), message.body)
