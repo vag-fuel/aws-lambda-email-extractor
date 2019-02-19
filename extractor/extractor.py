@@ -10,6 +10,7 @@ logging.basicConfig(level=logging.INFO)
 # noinspection PyUnusedLocal
 # pylint: disable=unused-argument
 def lambda_handler(event, context):
+    print('hello, world!')
     logger = logging.getLogger(__name__)
 
     message_id = event['Records'][0]['ses']['mail']['messageId']
