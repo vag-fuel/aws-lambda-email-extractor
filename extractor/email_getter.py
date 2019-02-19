@@ -4,7 +4,7 @@ from tempfile import TemporaryDirectory
 import boto3
 
 
-LOGGER = logging.getLogger()
+LOGGER = logging.getLogger(__name__)
 
 
 def get_raw_email(message_id: str, bucket_name: str, key_prefix: str) -> bytes:

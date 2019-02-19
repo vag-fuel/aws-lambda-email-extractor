@@ -4,11 +4,13 @@ from extractor.email_parser import ParsedEmail
 from extractor.email_getter import get_raw_email
 
 
+logging.basicConfig(level=logging.INFO)
+
+
 # noinspection PyUnusedLocal
 # pylint: disable=unused-argument
 def lambda_handler(event, context):
-    logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    logger = logging.getLogger(__name__)
 
     message_id = event['Records'][0]['ses']['mail']['messageId']
     bucket_name = 'tank-levels'

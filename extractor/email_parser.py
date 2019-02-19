@@ -6,7 +6,7 @@ from typing import Tuple, Generator, Union
 from html2text import html2text
 
 
-LOGGER = logging.getLogger()
+LOGGER = logging.getLogger(__name__)
 
 
 def clean_email_address(address: str) -> str:
