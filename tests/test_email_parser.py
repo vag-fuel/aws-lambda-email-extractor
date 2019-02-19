@@ -61,7 +61,7 @@ def test_that_attachments_are_extracted(email_with_attachments: bytes):
     assert attachments[2].filename == 'an-excel-file.xlsx'
 
 
-def test_that_base64_encoded_attachments_get_decoded(email_with_attachments: bytes):
+def test_that_attachments_get_decoded(email_with_attachments: bytes):
     message = ParsedEmail.from_bytes(email_with_attachments)
 
     text_file = list(message.get_attachments())[0]
@@ -69,7 +69,7 @@ def test_that_base64_encoded_attachments_get_decoded(email_with_attachments: byt
     excel_file = list(message.get_attachments())[2]
 
     assert text_file.filename == 'a-text-file.txt'
-    assert text_file.body == 'This is a text file\n'
+    assert text_file.body == b'This is a text file\n'
 
     assert pdf_file.filename == 'a-pdf-file.pdf'
     assert pdf_file.body.startswith(b'%PDF-1.4\n%\xc7\xec\x8f\xa2\n5')
