@@ -6,18 +6,17 @@ from typing import Tuple, Generator, Union
 from html2text import html2text
 
 
-LOGGER = logging.getLogger(__name__)
-
-
 def clean_email_address(address: str) -> str:
     """Returns the bare email address when the address is something like 'John Doe <jdoe@example.com>'"""
+
+    logger = logging.getLogger(__name__)
 
     if '<' in address:
         match = re.search(r'<(.*?)>', address)
         if match:
             return match.group(1).strip()
         else:
-            LOGGER.warning('Unable to clean email address "%s" even though it contains "<"', address)
+            logger.warning('Unable to clean email address "%s" even though it contains "<"', address)
     return address.strip()
 
 
