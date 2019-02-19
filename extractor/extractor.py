@@ -10,7 +10,6 @@ logging.basicConfig(level=logging.INFO)
 # noinspection PyUnusedLocal
 # pylint: disable=unused-argument
 def lambda_handler(event, context):
-    print('hello, world!')
     logger = logging.getLogger(__name__)
 
     message_id = event['Records'][0]['ses']['mail']['messageId']
@@ -22,4 +21,3 @@ def lambda_handler(event, context):
     message = ParsedEmail.from_bytes(raw_email)
 
     logger.info('%s %s %s', message.from_addr, ', '.join(message.to_addr), message.body)
-    print(f'{message.from_addr} {", ".join(message.to_addr)}\n{message.body}')
