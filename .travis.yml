@@ -23,6 +23,6 @@ deploy:
   role: arn:aws:iam::980858071036:role/service-role/tank-levels
   runtime: python3.7
   module_name: extractor/extractor
-  handler_name: extract
+  handler_name: lambda_handler
   environment_variables:
-    - PYTHONPATH=lib/;extractor
+    - PYTHONPATH=lib
