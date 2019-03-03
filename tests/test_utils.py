@@ -4,7 +4,7 @@ import boto3
 from moto import mock_s3
 from pytest import fixture
 
-from extractor.email_getter import get_raw_email
+from extractor.utils import get_raw_email
 
 
 @fixture

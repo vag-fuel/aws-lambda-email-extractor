@@ -1,13 +1,13 @@
-Return-Path: <01hair@gmail.com>
+Return-Path: <sender@example.com>
 Received: from mail-it1-f173.google.com (mail-it1-f173.google.com [209.85.166.173])
  by inbound-smtp.us-east-1.amazonaws.com with SMTP id aksbmbo841o0u7huaptjukfhkl21371nimt2g5g1
  for dayton-freight@tanks.vagfuel-oil.com;
  Mon, 18 Feb 2019 20:51:25 +0000 (UTC)
 X-SES-Spam-Verdict: PASS
 X-SES-Virus-Verdict: PASS
-Received-SPF: pass (spfCheck: domain of _spf.google.com designates 209.85.166.173 as permitted sender) client-ip=209.85.166.173; envelope-from=01hair@gmail.com; helo=mail-it1-f173.google.com;
+Received-SPF: pass (spfCheck: domain of _spf.google.com designates 209.85.166.173 as permitted sender) client-ip=209.85.166.173; envelope-from=sender@example.com; helo=mail-it1-f173.google.com;
 Authentication-Results: amazonses.com;
- spf=pass (spfCheck: domain of _spf.google.com designates 209.85.166.173 as permitted sender) client-ip=209.85.166.173; envelope-from=01hair@gmail.com; helo=mail-it1-f173.google.com;
+ spf=pass (spfCheck: domain of _spf.google.com designates 209.85.166.173 as permitted sender) client-ip=209.85.166.173; envelope-from=sender@example.com; helo=mail-it1-f173.google.com;
  dkim=pass header.i=@gmail.com;
  dmarc=pass header.from=gmail.com;
 X-SES-RECEIPT: AEFBQUFBQUFBQUFGc1Iwa01CaFpIaEUrWTh4NGdURGMxWTdrOFFMYUxyYVhZQTlTWVZtM0FTZWdORHVWRmc0WjJ2RzQwSktyZDlDblFZL0JwRjFpVjN4cWlLVUZJVERpSHRzN094eHF4RjgvVE4rTllMNDFMZG9FWjhhaWpFNmRucTRBMnNpQU9obVVvZSsyaG93dmhnRnlHRU5pdTBldmRlYmh6bmExVWhLbXROck1lYmdPNzd0Y0ZvN1Z2cFltSGtjSFdGYSsybXp2bFpUZmliTTFMWUhOTjdXQjYwK2RyNHFyOTFXckx0a3k5enRLN1Z1NDBvVGNIZzNOaW4zMXl5Rmk4S1dRbWFlQmcrLzZYVlR6QWR1NnBNQldJMXZKNjNSQ29JWUFYc3RKU0RTY05jNFpTR0E9PQ==
@@ -40,7 +40,7 @@ X-Google-Smtp-Source: AHgI3IYPcsCG2MBO5nODnInqS0V9wWLoglazIBksgsKUONJa0yjJSR8tF8
 X-Received: by 2002:a24:cc05:: with SMTP id x5mr473141itf.82.1550523084296;
  Mon, 18 Feb 2019 12:51:24 -0800 (PST)
 MIME-Version: 1.0
-From: Steve Hair <01hair@gmail.com>
+From: Steve Hair <sender@example.com>
 Date: Mon, 18 Feb 2019 15:51:12 -0500
 Message-ID: <CAPHbH+PW3JsJDHBS0vcqNSyXcGsUYFsx9cL2kGj_ter4AvG-Hg@mail.gmail.com>
 Subject: An email with attachments

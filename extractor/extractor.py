@@ -1,7 +1,7 @@
 import logging
 
 from extractor.email_parser import ParsedEmail
-from extractor.email_getter import get_raw_email
+from extractor.utils import get_raw_email
 
 
 def lambda_handler(event: dict, _context):
@@ -25,4 +25,4 @@ def _configure_logging():
     if root.handlers:
         for handler in root.handlers:
             root.removeHandler(handler)
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)

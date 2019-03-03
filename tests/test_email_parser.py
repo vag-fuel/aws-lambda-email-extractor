@@ -1,4 +1,5 @@
 import pathlib
+from base64 import b64encode
 
 from pytest import fixture
 
@@ -76,3 +77,37 @@ def test_that_attachments_get_decoded(email_with_attachments: bytes):
 
     assert excel_file.filename == 'an-excel-file.xlsx'
     assert excel_file.body.startswith(b'PK\x03\x04\x14\x00\x00\x00\x08\x00\xc5\xa5RN')
+
+
+def test_that_as_dict_works(email_with_attachments: bytes):
+    message = ParsedEmail.from_bytes(email_with_attachments)
+    attachments = list(message.get_attachments())
+
+    expected = {
+        'from': 'sender@example.com',
+        'to': ['dayton-freight@tanks.vagfuel-oil.com'],
+        'subject': 'An email with attachments',
+        'body': 'This is the message body\n',
+        'attachments': [
+            {
+                'filename': 'a-text-file.txt',
+                'content-type': 'text/plain',
+                'body': b64encode(attachments[0].body).decode(),
+                'base64': True,
+            },
+            {
+                'filename': 'a-pdf-file.pdf',
+                'content-type': 'application/pdf',
+                'body': b64encode(attachments[1].body).decode(),
+                'base64': True,
+            },
+            {
+                'filename': 'an-excel-file.xlsx',
+                'content-type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'body': b64encode(attachments[2].body).decode(),
+                'base64': True,
+            }
+        ]
+    }
+
+    assert message.as_dict() == expected
