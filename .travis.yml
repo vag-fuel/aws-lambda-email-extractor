@@ -23,7 +23,7 @@ deploy:
   provider: lambda
   function_name: tank-level-extractor
   region: us-east-1
-  role: arn:aws:iam::980858071036:role/service-role/tank-levels
+  role: arn:aws:iam::980858071036:role/lambda-tank-levels
   runtime: python3.7
   module_name: extractor/extractor
   handler_name: lambda_handler
