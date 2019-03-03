@@ -4,10 +4,8 @@ from extractor.email_parser import ParsedEmail
 from extractor.email_getter import get_raw_email
 
 
-logging.basicConfig(level=logging.INFO)
-
-
-def lambda_handler(event, _context):
+def lambda_handler(event: dict, _context):
+    _configure_logging()
     logger = logging.getLogger(__name__)
 
     message_id = event['Records'][0]['ses']['mail']['messageId']
@@ -20,3 +18,11 @@ def lambda_handler(event, _context):
 
     # do something with the message
     logger.info('%s %s %s', message.from_addr, ', '.join(message.to_addr), message.body)
+
+
+def _configure_logging():
+    root = logging.getLogger()
+    if root.handlers:
+        for handler in root.handlers:
+            root.removeHandler(handler)
+    logging.basicConfig(level=logging.DEBUG)
