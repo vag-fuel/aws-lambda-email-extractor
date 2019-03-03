@@ -1,12 +1,12 @@
+import json
 import logging
 from tempfile import TemporaryDirectory
 
 import boto3
+from typing import Dict
 
 
 def get_raw_email(message_id: str, bucket_name: str, key_prefix: str) -> bytes:
-    """Gets the raw email from s3"""
-
     logger = logging.getLogger(__name__)
     s3_client = boto3.client('s3')
 
@@ -18,3 +18,18 @@ def get_raw_email(message_id: str, bucket_name: str, key_prefix: str) -> bytes:
 
         with open(download_path, 'r+b') as f:
             return f.read()
+
+
+def publish_to_sns(message: Dict, arn: str) -> str:
+    logger = logging.getLogger(__name__)
+    sns_client = boto3.client('sns')
+
+    logger.info('Publishing message "%s" to %s', message['subject'], arn)
+    response = sns_client.publish(
+        TargetArn=arn,
+        Message=json.dumps({'default': json.dumps(message)}),
+        MessageStructure='json'
+    )
+
+    logger.info('Published "%s" as %s', message['subject'], response['MessageId'])
+    return response['MessageId']
