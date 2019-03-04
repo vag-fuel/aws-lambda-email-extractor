@@ -1,4 +1,5 @@
 import email
+import json
 import logging
 import re
 from base64 import b64encode
@@ -98,6 +99,9 @@ class ParsedEmail:
             'body': self.body,
             'attachments': [attachment.as_dict() for attachment in self.get_attachments()],
         }
+
+    def as_json(self) -> str:
+        return json.dumps(self.as_dict())
 
     @classmethod
     def from_bytes(cls, contents: bytes) -> 'ParsedEmail':

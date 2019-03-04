@@ -23,9 +23,9 @@ def test_that_publish_to_sns_works(mocker):
     mock_client = MagicMock()
     mocker.patch.object(boto3, 'client', return_value=mock_client)
 
-    message = {'subject': 'foo', 'bar': 'baz'}
+    message = json.dumps({'subject': 'foo', 'bar': 'baz'})
     publish_to_sns(message, arn)
     mock_client.publish.assert_called_with(
         TargetArn=arn,
-        Message=json.dumps({'default': json.dumps(message)}),
+        Message=json.dumps({'default': message}),
         MessageStructure='json')

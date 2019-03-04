@@ -3,7 +3,6 @@ import logging
 from tempfile import TemporaryDirectory
 
 import boto3
-from typing import Dict
 
 
 def get_raw_email(message_id: str, bucket_name: str, key_prefix: str) -> bytes:
@@ -20,15 +19,15 @@ def get_raw_email(message_id: str, bucket_name: str, key_prefix: str) -> bytes:
             return f.read()
 
 
-def publish_to_sns(message: Dict, arn: str) -> None:
+def publish_to_sns(message: str, arn: str) -> None:
     logger = logging.getLogger(__name__)
     sns_client = boto3.client('sns')
 
-    logger.info('Publishing message "%s" to %s', message['subject'], arn)
+    logger.info('Publishing message to %s', arn)
     response = sns_client.publish(
         TargetArn=arn,
-        Message=json.dumps({'default': json.dumps(message)}),
+        Message=json.dumps({'default': message}),
         MessageStructure='json'
     )
 
-    logger.info('Published "%s" as %s', message['subject'], response['MessageId'])
+    logger.info('Published to "%s" as "%s"', arn, response['MessageId'])

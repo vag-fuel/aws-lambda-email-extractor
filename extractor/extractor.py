@@ -3,7 +3,7 @@ import os
 import logging
 
 from extractor.email_parser import ParsedEmail
-from extractor.utils import get_raw_email, publish_to_sns
+from extractor.utils import publish_to_sns, get_raw_email
 
 
 def lambda_handler(event: dict, _context):
@@ -17,7 +17,7 @@ def lambda_handler(event: dict, _context):
 
     raw_email = get_raw_email(message_id, bucket_name, key_prefix)
     message = ParsedEmail.from_bytes(raw_email)
-    publish_to_sns(message.as_dict(), transformer_arn)
+    publish_to_sns(message.as_json(), transformer_arn)
 
 
 def _configure_logging():
