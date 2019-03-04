@@ -1,5 +1,6 @@
-import boto3
 import json
+
+import boto3
 from mock import MagicMock
 from moto import mock_s3
 

@@ -1,7 +1,7 @@
+import pathlib
+
 import boto3
 import botocore
-import pathlib
-from botocore.client import BaseClient
 from mock import MagicMock
 from pytest import fixture
 

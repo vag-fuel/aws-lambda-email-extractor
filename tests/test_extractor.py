@@ -1,10 +1,10 @@
-import botocore
 import json
 import os
-from botocore.client import BaseClient
+from typing import Callable, List, Tuple, Union
+
+import botocore
 from moto import mock_s3
 from pytest import fixture
-from typing import Callable, List, Tuple, Union
 
 from extractor.email_parser import ParsedEmail
 from extractor.extractor import lambda_handler

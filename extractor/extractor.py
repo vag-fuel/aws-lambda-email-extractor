@@ -1,6 +1,5 @@
-import os
-
 import logging
+import os
 
 from extractor.email_parser import ParsedEmail
 from extractor.utils import publish_to_sns, get_raw_email
