@@ -26,10 +26,3 @@ def _configure_logging():
         for handler in root.handlers:
             root.removeHandler(handler)
     logging.basicConfig(level=logging.INFO)
-
-
-def _get_sns_arn() -> str:
-    arn = os.environ.get('TRANSFORMER_ARN')
-    if not arn:
-        raise ValueError('ARN for the email transformer was not found! Is TRANSFORMER_ARN set?')
-    return arn
