@@ -1,7 +1,9 @@
 import email
+import json
 import logging
 import re
-from typing import Tuple, Generator, Union
+from base64 import b64encode
+from typing import Tuple, Generator, Union, Dict, List
 
 from html2text import html2text
 
@@ -37,6 +39,14 @@ class EmailAttachment:
     @property
     def filename(self) -> str:
         return self._attachment.get_filename()
+
+    def as_dict(self) -> Dict[str, str]:
+        return {
+            'filename': self.filename,
+            'content-type': self.content_type,
+            'body': b64encode(self.body).decode(),
+            'base64': True,
+        }
 
 
 class ParsedEmail:
@@ -80,6 +90,18 @@ class ParsedEmail:
         for part in self._message.walk():
             if part.get_content_disposition() == 'attachment':
                 yield EmailAttachment(part)
+
+    def as_dict(self) -> Dict[str, Union[str, List[str], Dict[str, Union[str, bool]]]]:
+        return {
+            'from': self.from_addr,
+            'to': list(self.to_addr),
+            'subject': self.subject,
+            'body': self.body,
+            'attachments': [attachment.as_dict() for attachment in self.get_attachments()],
+        }
+
+    def as_json(self) -> str:
+        return json.dumps(self.as_dict())
 
     @classmethod
     def from_bytes(cls, contents: bytes) -> 'ParsedEmail':

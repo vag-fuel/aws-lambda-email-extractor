@@ -29,3 +29,5 @@ deploy:
   handler_name: lambda_handler
   environment_variables:
     - PYTHONPATH=lib
+    - TRANSFORMER_ARN=arn:aws:sns:us-east-1:980858071036:tank-level-email
+    - EMAIL_BUCKET_NAME=tank-levels
