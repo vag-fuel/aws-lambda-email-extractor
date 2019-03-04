@@ -33,11 +33,12 @@ def test_that_lambda_handler_wires_everything_correctly(
         mock_sns_client: botocore.client.BaseClient,
         set_environment_variable: Callable[[str, str], None]):
     sns_arn = 'I am an ARM'
-    set_environment_variable('TRANSFORMER_ARN', sns_arn)
-
-    bucket = 'tank-levels'
+    bucket = 'bucket-bucket-bucket'
     prefix = 'tank-recipient'
     message_id = 'id1234'
+
+    set_environment_variable('TRANSFORMER_ARN', sns_arn)
+    set_environment_variable('EMAIL_BUCKET_NAME', bucket)
     create_s3_object(bucket, f'{prefix}/{message_id}', base_email)
 
     event = {

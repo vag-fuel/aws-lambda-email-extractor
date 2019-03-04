@@ -9,9 +9,10 @@ from extractor.utils import publish_to_sns, get_raw_email
 def lambda_handler(event: dict, _context):
     _configure_logging()
 
-    transformer_arn = _get_sns_arn()
+    transformer_arn = os.environ['TRANSFORMER_ARN']
+    bucket_name = os.environ['EMAIL_BUCKET_NAME']
+
     message_id = event['Records'][0]['ses']['mail']['messageId']
-    bucket_name = 'tank-levels'
     # key prefix is the first part of the email address (i.e. 'jdoe' from 'jdoe@example.com')
     key_prefix = event['Records'][0]['ses']['receipt']['recipients'][0].split('@')[0]
 
