@@ -20,7 +20,7 @@ def get_raw_email(message_id: str, bucket_name: str, key_prefix: str) -> bytes:
             return f.read()
 
 
-def publish_to_sns(message: Dict, arn: str) -> str:
+def publish_to_sns(message: Dict, arn: str) -> None:
     logger = logging.getLogger(__name__)
     sns_client = boto3.client('sns')
 
@@ -32,4 +32,3 @@ def publish_to_sns(message: Dict, arn: str) -> str:
     )
 
     logger.info('Published "%s" as %s', message['subject'], response['MessageId'])
-    return response['MessageId']
