@@ -1,6 +1,6 @@
 -r base.txt
 
-codecov==2.0.15
+codecov==2.0.22
 flake8==3.7.9
 moto==1.3.13
 pylint==2.4.3
