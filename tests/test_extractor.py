@@ -20,12 +20,6 @@ def set_environment_variable():
         os.environ[name] = value
     yield set_env_var
 
-    for var_name, old_value in old_values:
-        if old_value is None:
-            del os.environ[var_name]
-        else:
-            os.environ[var_name] = old_value
-
 
 @mock_s3
 def test_that_lambda_handler_wires_everything_correctly(
