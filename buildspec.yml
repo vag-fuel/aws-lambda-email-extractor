@@ -20,11 +20,11 @@ phases:
   post_build:
     commands:
       - codecov
-      - zip -r build.zip extractor/*.py lib
       - echo Build completed on `date`
 
 artifacts:
   s3-prefix: builds
   files:
-    - build.zip
+    - extractor
+    - lib
   name: email-extractor.zip
