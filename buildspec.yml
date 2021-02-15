@@ -11,7 +11,7 @@ phases:
       - echo Build started on `date`
       - flake8
       - pylint **/*.py
-      - cd vag && py.test
+      - pytest --cov-report=xml --cov=extractor
   post_build:
     commands:
       - codecov
