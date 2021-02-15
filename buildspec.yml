@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    CODECOV_TOKEN: 52974e58-752e-4e69-899d-08d6f39baadc
+
 phases:
   install:
     runtime-versions:
