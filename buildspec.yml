@@ -1,0 +1,22 @@
+version: 0.2
+
+env:
+  variables:
+    - PYTHONPATH=lib
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+    commands:
+      - pip install -t lib/ -r requirements/base.txt
+  build:
+    commands:
+      - echo Build started on `date`
+      - flake8
+      - pylint **/*.py
+      - cd vag && py.test
+  post_build:
+    commands:
+      - codecov
+      - echo Build completed on `date`
