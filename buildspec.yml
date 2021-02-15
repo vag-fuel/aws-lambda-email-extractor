@@ -1,15 +1,11 @@
 version: 0.2
 
-env:
-  variables:
-    PYTHONPATH: lib
-
 phases:
   install:
     runtime-versions:
       python: 3.7
     commands:
-      - pip install -t lib/ -r requirements/base.txt
+      - pip install -r requirements/test.txt
   build:
     commands:
       - echo Build started on `date`
@@ -19,4 +15,5 @@ phases:
   post_build:
     commands:
       - codecov
+      - pip install -t lib/ -r requirements/base.txt
       - echo Build completed on `date`
