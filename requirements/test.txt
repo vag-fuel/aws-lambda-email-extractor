@@ -2,7 +2,7 @@
 
 codecov==2.1.11
 flake8==3.9.2
-moto==2.0.8
+moto==2.0.10
 pylint==2.8.3
 pytest==6.2.4
 pytest-cov==2.12.0
