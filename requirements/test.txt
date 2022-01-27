@@ -1,9 +1,9 @@
 -r base.txt
 
 codecov==2.1.12
-flake8==3.9.2
-moto==2.2.8
-pylint==2.11.1
+flake8==4.0.1
+moto==2.3.0
+pylint==2.12.2
 pytest==6.2.5
-pytest-cov==2.12.1
+pytest-cov==3.0.0
 pytest-mock==3.6.1
