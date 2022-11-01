@@ -6,4 +6,4 @@ moto==4.0.8
 pylint==2.15.5
 pytest==7.2.0
 pytest-cov==4.0.0
-pytest-mock==3.7.0
+pytest-mock==3.10.0
