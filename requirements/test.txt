@@ -4,6 +4,6 @@ codecov==2.1.13
 flake8==6.1.0
 moto==4.2.10
 pylint==3.0.2
-pytest==7.4.2
+pytest==7.4.3
 pytest-cov==4.1.0
 pytest-mock==3.11.1
